@@ -1,0 +1,168 @@
+.hero-container {
+    position: relative;
+    background-image: url('../assets/backgroundimage.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 100vh;
+    padding-bottom: 60px;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+    margin-bottom: -60px;
+
+}
+
+.welcome {
+    padding-top: 40px;
+}
+
+.box {
+    width: 100%;
+    height: 65vh;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    padding: 20px;
+    box-sizing: border-box;
+    color: black;
+}
+
+#bookmark {
+    padding-right: 15px;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+#searchbarinput {
+    margin-right: 30px;
+}
+
+.box2 {
+    width: 100%;
+    margin: 0 auto;
+    height: 60vh;
+    background-color: #282626;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+}
+
+.logintext {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#login {
+    text-align: center;
+    padding-top: 100px;
+}
+
+#user {
+    margin-top: 10px;
+    font-size: 30px;
+    border-radius: 12px;
+    padding-left: 12px;
+    border-color: #5959b7;
+    margin-bottom: 5px;
+}
+
+#pass {
+    margin-top: 10px;
+    font-size: 30px;
+    border-radius: 12px;
+    padding-left: 12px;
+    border-color: #5959b7;
+    margin-bottom: 5px;
+}
+
+#confpass {
+    margin-top: 10px;
+    font-size: 30px;
+    border-radius: 12px;
+    padding-left: 12px;
+    border-color: #5959b7;
+}
+
+.invis {
+    background: transparent;
+    border: none;
+}
+
+.passdiv {
+    margin-bottom: 20px;
+}
+
+.loginsignup {
+    justify-content: space-between;
+    display: flex;
+    padding-left: 450px;
+    padding-right: 450px;
+}
+
+.middle {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.guides4 {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
+.author {
+    padding-left: 30px;
+    padding-bottom: 40px;
+    color: grey;
+}
+
+.biggerBox {
+    width: 100%;
+    min-height: 80vh;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    padding: 20px;
+    box-sizing: border-box;
+    color: black;
+}
+
+.inputcards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.front-back {
+    border-radius: 4px;
+    height: 80px;
+    text-align: center;
+    margin-right: 10px;
+    border-color: #5959b7;
+
+}
+
+.inputcardstext {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+
+}
+#push200 {
+    margin-left: 395px;
+    margin-top: 20px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}

@@ -1,0 +1,12 @@
+.rectangle {
+    width:400px;
+    height: 100px;
+    background-color: #5959b7;
+    border-radius: 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+h5 {
+    padding-left: 10px;
+    padding-top: 20px;
+}

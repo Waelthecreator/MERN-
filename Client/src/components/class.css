@@ -1,0 +1,25 @@
+#box{
+    width: 200px;
+      height: 200px;
+      background-color: #8190ec;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: opacity 0.4s ease;
+      cursor: pointer;
+}
+#box:hover {
+    opacity: 0.8;
+}
+#boxfill {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color:black;
+    transition: opacity 0.2s ease;
+}
+#boxfill:active {
+    opacity:0.5;
+}

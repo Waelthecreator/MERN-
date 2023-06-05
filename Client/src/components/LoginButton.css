@@ -1,0 +1,40 @@
+.loginbutton{
+    appearance: button;
+    background-color: #2248f2;
+    border-radius: 6px;
+    border-width: 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+    font-size: 100%;
+    height: 40px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+  .loginbutton:hover{
+      opacity: 0.8;
+  }
+  .loginbutton:active {
+      opacity: 0.5;
+  }
+  .signupButton {
+    appearance: button;
+    background-color: #ffffff;
+    border-radius: 6px;
+    border-width: 0;
+    box-sizing: border-box;
+    color: #2248f2;
+    cursor: pointer;
+    font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+    font-size: 100%;
+    height: 40px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+  .signupButton:hover {
+    opacity: 0.8;
+  }
+  .signupButton:active {
+    opacity: 0.5;
+  }

@@ -1,0 +1,78 @@
+.flashcard {
+  width: 600px;
+  height: 400px;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flashcard.flipped .card {
+  transform: rotateY(180deg);
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.front {
+  background-color: #5959b7;
+  transform: rotateY(0deg);
+}
+
+.back {
+  background-color: #5959b7;
+  transform: rotateY(180deg);
+}
+
+.buttons {
+  margin-top: 10px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.next_prev {
+  appearance: button;
+  background-color: #ffffff;
+  height: 40px;
+  border-radius: 6px;
+  border-width: 0;
+  box-sizing: border-box;
+  color: #2248f2;
+  cursor: pointer;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+  font-size: 100%;
+  height: 40px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.next_prev:hover {
+  opacity: 0.8;
+}
+
+.next_prev:active {
+  opacity: 0.5;
+}
+.counter {
+  margin-top: 10px;
+}

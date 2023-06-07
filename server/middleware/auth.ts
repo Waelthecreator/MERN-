@@ -15,8 +15,8 @@ const authen = asyncHandler(async (req:Request, res:Response, next:NextFunction)
         next();
     }
     else{
-        res.statusCode = 400;
-        res.json({mes1: "not available"});
+        res.statusCode = 403;
+        res.json({mes1: "not authorized"});
     }
 });
 export default authen;

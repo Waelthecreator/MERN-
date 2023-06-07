@@ -14,7 +14,7 @@ const guides = new schema({
         required: true,
     },
     Cards: {
-        type: [String],
+        type: [[String]],
         required: true
     },
     Access: {

@@ -34,8 +34,7 @@ const Signup = asyncHandler(async (req: Request, res: Response) => {
             sameSite: false
         });
         res.json({
-            Mesaage: "New user created",
-            token: geneJWT(newUser.Username)
+            Mesaage: "New user created"
         });
 
     }
@@ -71,6 +70,7 @@ const Logout = asyncHandler(async (req: Request, res: Response) => {
     res.clearCookie('authToken');
     res.status(200).json({ Message: "Logged out successfully" });
 })
+
 const viewPersonals = asyncHandler(async (req: Request, res: Response) => {
     let personalguides = req.body.user.Personal;
     if (personalguides.size === 0) {
@@ -78,9 +78,9 @@ const viewPersonals = asyncHandler(async (req: Request, res: Response) => {
         res.json({ Message: "No personal guides to view" })
     }
     else {
-        const guides = await guidesModel.find({ _id: { $in: personalguides } });
+        const guides = await guidesModel.find({ _id: { $in: personalguides } }).select('_id Name');
         res.statusCode = 200;
-        res.json({ Guides: guides });
+        res.json({ guides });
     }
 
 });
@@ -93,7 +93,7 @@ const viewFavorites = asyncHandler(async (req: Request, res: Response) => {
     else {
         const guides = await guidesModel.find({ _id: { $in: Favguides }, Access: true });
         res.statusCode = 200;
-        res.json({ Guides: guides });
+        res.json({ guides });
     }
 
 });
@@ -124,7 +124,7 @@ const MainPers = asyncHandler(async (req: Request, res: Response) => {
     const personalGuides = req.body.user.Personal;
     const guides = await guidesModel.find({ _id: { $in: personalGuides } }).sort({ createdAt: -1 }).limit(4).select('_id title');
     res.statusCode = 200;
-    res.json({ guides: guides });
+    res.json({ guides });
 });
 export {
     Signup,

@@ -5,44 +5,71 @@ import Slideshow from "../components/caraousel";
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
+
+
 interface guideobj {
+    _id:string
     Name:string,
     Author:string,
     Notes:string,
     Cards:string[][],
     Access:boolean
 }
+interface jsonresp {
+    guide:guideobj
+}
+interface editRights {
+    mes1:boolean
+}
+interface message {
+
+}
 const Guide = () => {
     const {state} = useLocation();
-    let Id = state.id || "";
-    useEffect(() =>{
-        axios.get("http://localhost:5000/Guides", {
-            params: {
-                id:Id
-            }
-        }).then((Response) => {
-                
-        })
-    }, [])
-    let flashcards = [
-        ["front1", "back1"],
-        ["front2", "back2"],
-        ["front3", "back3"],
-        ["front4", "back4"],
-    ];
-    const author = "john";
-    let title = "guide1";
-    const personal = true;
-
+    const [personal, setPersonal] = useState(false);
+    const [flashcardsState, setFlashcardsState] = useState<string[][]>([]);
+    const [privacy, setPrivacy] = useState(false);
+    const [guide, setGuide] = useState<guideobj>({
+        _id:"",
+        Name: "",
+        Author: "",
+        Notes: "",
+        Cards: [],
+        Access: false,
+      });
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isPenClicked, setIsPenClicked] = useState(false);
-    const [flashcardsState, setFlashcardsState] = useState(flashcards);
-
+    useEffect(() =>{
+        axios.get<jsonresp>(`http://localhost:5000/Guides/${state.Id}`)
+        .then((Response) => {
+            const data = Response.data;
+            setGuide(data.guide);
+            setFlashcardsState(data.guide.Cards);
+            setPrivacy(data.guide.Access);
+            setPersonal(!data.guide.Access);
+        }
+        ).catch((error) => {
+            console.log(error);
+        })
+        if (!personal){
+            axios.get<editRights>(`http://localhost:5000/Guides/edit/${state.Id}`)
+            .then((Response) =>{
+                const data =Response.data;
+                setPersonal(data.mes1);
+            })
+            .catch((error) => {
+                console.log(error);
+                setPersonal(false);
+            })
+        }
+    }, [])
     const handleBookmarkClick = () => {
         setIsBookmarked(!isBookmarked);
     };
 
     const handlePenClick = () => {
+        if(isPenClicked){
+        }
         setIsPenClicked(!isPenClicked);
     };
 
@@ -57,6 +84,17 @@ const Guide = () => {
         updatedFlashcards[cardIndex][fieldIndex] = newValue;
         setFlashcardsState(updatedFlashcards);
     };
+    const HandlePrivacyClick = () => {
+        axios.put<message>(`http://localhost:5000/Guides/access/${state.Id}`, {access:!privacy})
+        .then((Response) =>{
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        setPrivacy(!privacy);
+        
+        
+    }
 
 
     const renderBookmarkIcon = () => {
@@ -115,16 +153,26 @@ const Guide = () => {
             return (renderEdit());
         }
         else {
-            return <Slideshow flashcards={flashcardsState} />
+            if (flashcardsState.length === 0){
+                return <></>
+            }
+            else{
+                return <Slideshow flashcards={flashcardsState} />
+            }
+            
         }
     }
 
     const setup = (personal: boolean) => {
         if (personal) {
             return (
-                <button className={`invis ${isPenClicked ? 'pen-clicked' : ''}`} onClick={handlePenClick}>
+                <div>
+                    <button className='privacybutton' onClick={HandlePrivacyClick}>{privacy ? "Public" : "Private"}</button> 
+                    <button className={`invis ${isPenClicked ? 'pen-clicked' : ''}`} onClick={handlePenClick}>
                     {renderPenIcon()}
                 </button>
+                </div>
+                
             );
         } else {
             return (
@@ -142,10 +190,10 @@ const Guide = () => {
                     <h1 className="welcome">Guide</h1>
                     <div className="biggerBox" id="spaceabove">
                         <div className="guides4">
-                            <h1>{title}</h1>
+                            <h1>{guide.Name}</h1>
                             {setup(personal)}
                         </div>
-                        <h3 className="author">By: {author}</h3>
+                        <h3 className="author">By: {guide.Author}</h3>
                         <div className="middle">
                             {renderCards()}
                         </div>

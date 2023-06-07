@@ -10,7 +10,7 @@ UserRouter.post('/Signup', Signup);
 UserRouter.post('/Login', Login); 
 //access: public
 //requires a body with the payload Username:string and Password:string
-UserRouter.get('/Guides', authen, viewPersonals);
+UserRouter.get('/', authen, viewPersonals);
 //access:private 
 UserRouter.get('/logout', Logout);
 //access: public

@@ -35,21 +35,28 @@ const makeGuide = asyncHandler(async (req: Request, res: Response) => {
     }
 });
 const GetGuide = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const guide = await guidesModel.findOne({ _id: req.params.id});
-    if (guide?.Access! === true) {
-        res.statusCode = 200;
-        res.json(guide);
+    const guide = await guidesModel.findOne({ _id: req.params.id}, { Name: 1, Author: 1, Notes: 1, Cards: 1, Access:1 });
+    if(guide){
+        if (guide.Access === true) {
+            res.statusCode = 200;
+            res.json({guide:guide});
+        }
+        else {
+            next()
+        }
     }
-    else {
-        next()
+    else{
+        res.statusCode = 404;
+        res.json({mes1:"guide not found"});
     }
+    
 })
 const GetPrivGuide = asyncHandler(async (req: Request, res: Response) => {
     let personal = req.body.user.Personal;
     if (personal.includes(req.params.id)) {
-        const guide = await guidesModel.findOne({ _id: req.params.id });
+        const guide = await guidesModel.findOne({ _id: req.params.id }).select('Name Author Notes Cards Access');
         res.statusCode = 200;
-        res.json(guide);
+        res.json({guide:guide});
     }
     else {
         res.statusCode = 403;
@@ -158,7 +165,7 @@ const PopularGuides = asyncHandler(async (req: Request, res: Response) => {
 const AllGuides = asyncHandler(async (req: Request, res: Response) => {
     const all = await guidesModel.find({ Access: true }).sort({ Likes: -1 }).select('_id Name').lean();
     res.statusCode = 200;
-    res.json({ Guides: all });
+    res.json({ guides:all });
 });
 export {
     makeGuide, deleteGuide, updateNotesAndCards, changeAccess, GetGuide, GetPrivGuide, PopularGuides, updateLikes, AllGuides,GetEditingRights

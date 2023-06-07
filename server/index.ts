@@ -9,7 +9,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { AllGuides, PopularGuides } from './controllers/guidesController';
 import { MainPers } from './controllers/UsersController';
-import { Request,Response,NextFunction } from 'express';
 config();
 
 const app = express();
@@ -24,8 +23,8 @@ app.use(express.json());
 app.use(errHandler);
 app.use('/Guides', GuideRouter);
 app.use('/Users', UserRouter);
-app.get("/all", AllGuides);
-app.get('/', PopularGuides); 
+app.get("/all", AllGuides); //has python test
+app.get('/', PopularGuides);//has python test
 //access: public
 app.get("/pers",authen, MainPers);
 //access:private
